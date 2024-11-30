@@ -25,6 +25,7 @@ public class Field {
         return field;
     }
 
+    // Ищет первую незанятую ячейку
     public int getEmptyFieldIndex() {
         return field.entrySet().stream()
                 .filter(e -> e.getValue() == Sign.EMPTY)
@@ -32,6 +33,7 @@ public class Field {
                 .findFirst().orElse(-1);
     }
 
+    // Возвращает значения карты “field” в виде списка, отсортированного в порядке возрастания индексов.
     public List<Sign> getFieldData() {
         return field.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
@@ -39,6 +41,8 @@ public class Field {
                 .collect(Collectors.toList());
     }
 
+    // Проверяет, не завершена ли игра. Если есть ряд из трех крестиков – возвращает крестик, если из трех ноликов
+    // – нолик. Иначе – пустоту.
     public Sign checkWin() {
         List<List<Integer>> winPossibilities = List.of(
                 List.of(0, 1, 2),
